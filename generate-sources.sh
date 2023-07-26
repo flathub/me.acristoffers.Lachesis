@@ -9,12 +9,12 @@ popd || exit
 
 pushd flatpak-builder-tools/node || exit
 
-poetry install --no-root
+poetry install
 
-poetry run flatpak-node-generator -o out1.json yarn ../../Lachesis/yarn.lock
-poetry run flatpak-node-generator -o out2.json yarn ../../Lachesis/Lachesis/yarn.lock
-poetry run flatpak-node-generator -o out3.json yarn ../../Lachesis/desktop/yarn.lock
-poetry run flatpak-node-generator -o out4.json yarn ../../Lachesis/src/desktop/yarn.lock
+poetry run flatpak-node-generator -o out1.json npm ../../Lachesis/package-lock.json
+poetry run flatpak-node-generator -o out2.json npm ../../Lachesis/Lachesis/package-lock.json
+poetry run flatpak-node-generator -o out3.json npm ../../Lachesis/desktop/package-lock.json
+poetry run flatpak-node-generator -o out4.json npm ../../Lachesis/src/desktop/package-lock.json
 
 jq -sc "flatten | unique | sort_by(.type)" out1.json out2.json out3.json out4.json > ../../generated-sources.json
 

@@ -20,22 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-YARNRC="$FLATPAK_BUILDER_BUILDDIR/yarnrc"
-echo yarn-offline-mirror "\"$FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror\"" > "$FLATPAK_BUILDER_BUILDDIR/yarnrc"
-
 # Install dependencies
 mkdir -p desktop/www desktop/build
 cp -r src/desktop/* desktop/www/
 
-yarn install --offline --use-yarnrc "$YARNRC"
-yarn install --offline --use-yarnrc "$YARNRC" --cwd Lachesis
-yarn install --offline --use-yarnrc "$YARNRC" --cwd desktop
-yarn install --offline --use-yarnrc "$YARNRC" --cwd desktop/www
+npm install --offline
+npm install --offline --prefix Lachesis
+npm install --offline --prefix desktop
+npm install --offline --prefix desktop/www
 
 pushd desktop/www || exit
 npx tsc
 rm -r node_modules index.ts tsconfig.json
-yarn install --omit=dev --offline --use-yarnrc "$YARNRC"
+npm install --omit dev --offline
 popd || exit
 
 pushd Lachesis || exit
