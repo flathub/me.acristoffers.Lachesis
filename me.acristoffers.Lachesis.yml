@@ -22,6 +22,9 @@ modules:
     build-options:
       env:
         XDG_CACHE_HOME: /run/build/lachesis/flatpak-node/cache
+        npm_config_cache: /run/build/lachesis/flatpak-node/npm-cache
+        npm_config_nodedir: /usr/lib/sdk/node18
+        npm_config_offline: 'true'
     build-commands:
       - bash build-flatpak.sh
       - cp -a desktop/dist/linux*unpacked ${FLATPAK_DEST}/main
@@ -32,7 +35,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/acristoffers/Lachesis.git
-        commit: b507c3475d8ec3460df846fa9dc26163ff799369
+        commit: aab1ed66a000f0a62e2aa261c7a7e351f0c70ff6
       - generated-sources.json
       - type: script
         dest-filename: lachesis
