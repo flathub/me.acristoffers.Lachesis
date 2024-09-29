@@ -5,15 +5,20 @@
   <name>Lachesis</name>
   <summary>Moirai supervisor</summary>
 
+  <developer id="me.acristoffers">
+    <name>Álan Crístoffer e Sousa</name>
+  </developer>
+
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
 
   <url type="homepage">https://github.com/acristoffers/Lachesis</url>
+  <url type="vcs-browser">https://github.com/acristoffers/Lachesis</url>
   <url type="help">https://github.com/acristoffers/Lachesis/issues</url>
   <url type="bugtracker">https://github.com/acristoffers/Lachesis/issues</url>
 
   <releases>
-    <release version="1.3.11" date="2023-02-28"/>
+    <release version="1.3.12" date="2024-11-01"/>
   </releases>
 
   <update_contact>acristoffers@startmail.com</update_contact>
@@ -28,15 +33,27 @@
 
   <launchable type="desktop-id">me.acristoffers.Lachesis.desktop</launchable>
 
+  <branding>
+    <color type="primary" scheme_preference="light">#795548</color>
+    <color type="primary" scheme_preference="dark">#795548</color>
+  </branding>
+
   <screenshots>
     <screenshot type="default">
       <image>https://acristoffers.me/screenshots/Lachesis1.jpg</image>
+      <caption>Hardware setup</caption>
     </screenshot>
     <screenshot>
       <image>https://acristoffers.me/screenshots/Lachesis2.jpg</image>
+      <caption>Open-loop test setup</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://acristoffers.me/screenshots/Lachesis3.jpg</image>
+      <caption>Control code written in Python</caption>
     </screenshot>
     <screenshot>
       <image>https://acristoffers.me/screenshots/Lachesis4.jpg</image>
+      <caption>Results visualization (also in real-time)</caption>
     </screenshot>
   </screenshots>
 </component>

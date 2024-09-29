@@ -12,6 +12,7 @@ finish-args:
   - --share=ipc
   - --socket=x11
   - --share=network
+  - --device=dri
 build-options:
   append-path: /usr/lib/sdk/node20/bin
   env:
@@ -33,10 +34,10 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.appdata.xml
       - install -Dm755 -t /app/bin/ lachesis
     sources:
+      - generated-sources.json
       - type: git
         url: https://github.com/acristoffers/Lachesis.git
-        commit: aab1ed66a000f0a62e2aa261c7a7e351f0c70ff6
-      - generated-sources.json
+        commit: dd89117e285babde84a387d5cc859087d791a682
       - type: script
         dest-filename: lachesis
         commands:

@@ -4,7 +4,7 @@ Type=Application
 
 Name=Lachesis
 Comment=Moirai supervisor
-Categories=Science;Engineering;
+Categories=Science;Development;
 
 Icon=me.acristoffers.Lachesis
 Exec=lachesis
