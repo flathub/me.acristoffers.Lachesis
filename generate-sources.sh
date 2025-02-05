@@ -4,7 +4,7 @@ git clone https://github.com/acristoffers/Lachesis
 git clone https://github.com/flatpak/flatpak-builder-tools
 
 pushd Lachesis || exit
-git checkout "$(yq -r '.modules[0].sources[0].commit' ../me.acristoffers.Lachesis.yml)"
+git checkout "$(yq -r '.modules[0].sources[1].commit' ../me.acristoffers.Lachesis.yml)"
 popd || exit
 
 pushd flatpak-builder-tools/node || exit
