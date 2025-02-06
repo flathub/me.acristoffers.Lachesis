@@ -37,7 +37,7 @@ modules:
       - generated-sources.json
       - type: git
         url: https://github.com/acristoffers/Lachesis.git
-        commit: dd89117e285babde84a387d5cc859087d791a682
+        commit: 76a8eabbe20908bf7ca0381ec619c5d98403b33d
       - type: script
         dest-filename: lachesis
         commands:
