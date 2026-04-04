@@ -5,18 +5,20 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node20
+  - org.freedesktop.Sdk.Extension.node22
 command: lachesis
 separate-locales: false
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --share=network
   - --device=dri
 build-options:
-  append-path: /usr/lib/sdk/node20/bin
+  append-path: /usr/lib/sdk/node22/bin
   env:
     YARN_LOGLEVEL: info
+    TURBO_TELEMETRY_DISABLED: '1'
 modules:
   - name: lachesis
     buildsystem: simple
@@ -24,7 +26,7 @@ modules:
       env:
         XDG_CACHE_HOME: /run/build/lachesis/flatpak-node/cache
         npm_config_cache: /run/build/lachesis/flatpak-node/npm-cache
-        npm_config_nodedir: /usr/lib/sdk/node20
+        npm_config_nodedir: /usr/lib/sdk/node22
         npm_config_offline: 'true'
     build-commands:
       - bash build-flatpak.sh
@@ -37,11 +39,11 @@ modules:
       - generated-sources.json
       - type: git
         url: https://github.com/acristoffers/Lachesis.git
-        commit: 76a8eabbe20908bf7ca0381ec619c5d98403b33d
+        commit: be0db9c130679f2c5e7a4937826c382346db283c
       - type: script
         dest-filename: lachesis
         commands:
-          - zypak-wrapper.sh /app/main/lachesis "$@"
+          - zypak-wrapper.sh /app/main/lachesis --ozone-platform=wayland --enable-features=WaylandWindowDecorations "$@"
       - type: file
         path: me.acristoffers.Lachesis.desktop
       - type: file
