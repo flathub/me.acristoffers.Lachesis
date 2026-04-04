@@ -20,28 +20,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# Install dependencies
-mkdir -p desktop/www desktop/build
-cp -r src/desktop/* desktop/www/
+set -e
 
+# Install all workspace dependencies from offline cache (root installs all workspaces)
 npm install --offline
-npm install --offline --prefix Lachesis
-npm install --offline --prefix desktop
-npm install --offline --prefix desktop/www
 
-pushd desktop/www || exit
+# Build electron main process
+pushd src/desktop || exit
 npx tsc
-rm -r node_modules index.ts tsconfig.json
-npm install --omit dev --offline
 popd || exit
 
+# Build Angular app
 pushd Lachesis || exit
-npx ng build --configuration production --optimization
+npx ng build --configuration production
 popd || exit
 
-mv Lachesis/dist/Lachesis desktop/www/Lachesis
+# Stage: prepare desktop/www with compiled files
+mkdir -p desktop/www desktop/build
+
+cp src/desktop/dist/index.js       desktop/www/index.js
+cp src/desktop/package.json        desktop/www/package.json
+cp src/desktop/package-lock.json   desktop/www/package-lock.json
+
+# Install production-only deps for the electron main (offline)
+npm install --omit=dev --offline --prefix desktop/www
+
+cp -r Lachesis/dist/Lachesis desktop/www/Lachesis
 cp -r src/icons/* desktop/build/
 
+# Package the electron app as an unpacked directory (no installer needed for flatpak)
 pushd desktop || exit
 npx electron-builder --dir --linux --publish never
 popd || exit
